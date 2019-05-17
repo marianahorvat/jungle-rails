@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   resources :orders, only: [:create, :show]
 
   resources :users, only: [:create, :new]
+
+  # These routes will be for signup. The first renders a form in the browse, the second will 
+    # receive the form and create a user in our database using the data given to us by the user.
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
   get '/login' => 'sessions#new'
