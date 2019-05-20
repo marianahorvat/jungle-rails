@@ -132,5 +132,36 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+## REVIEWS
+
+puts "Finding Products ..."
+prod2 = Product.find_by! id: 2
+prod11 = Product.find_by! id: 11
+prod12 = Product.find_by! id: 12
+
+puts "Re-creating Reviews ..."
+
+Review.destroy_all
+
+Review.create!({
+  product_id: 2, 
+  user_id: 1, 
+  description: "Great product",
+  rating: 1
+})
+
+ Review.create!({
+  product_id: 11, 
+  user_id: 2, 
+  description: "Not recommended",
+  rating: 5
+})
+
+ Review.create!({
+  product_id: 12, 
+  user_id: 1, 
+  description: "Product is good",
+  rating: 3
+})
 
 puts "DONE!"

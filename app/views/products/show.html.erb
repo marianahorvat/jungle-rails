@@ -24,7 +24,44 @@
           <dd><%= @product.price %></dd>
         </dl>
       </div>
-    </div>
+
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-1">
+          <%= form_for [@product, @review] do |form| %>
+            <% if form.object.errors.any? %>
+              <div class="alert alert-danger">
+                <strong>The review was not due to the following errors:</strong>
+                <ul>
+                  <% form.object.errors.full_messages.each do |error| %>
+                    <li><%= error %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+            <div class="form-group">
+              <p>Enter the rating for this product</p>
+              <%= form.select :rating, [1, 2, 3, 4, 5] %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :description %>
+              <%= form.text_area :description, class: 'form-control' %>
+            </div>
+
+            <%= form.submit 'Submit rating', class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-1">
+          <p>Reviews:</p>
+          <% @product.reviews.each do |review| %>
+            <p> <%= review.description %> </p>
+            <p> <%= review.rating %> </p>
+          <% end %>
+        </div>
+      </div>
 
   </article>
 
