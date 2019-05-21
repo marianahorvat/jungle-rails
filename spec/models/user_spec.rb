@@ -77,4 +77,32 @@ RSpec.describe User, type: :model do
 
   end
 
+  describe '.authenticate_with_credentials' do
+    # examples for this class method here
+    subject do
+      user = User.new(
+        first_name: 'John',
+        last_name: 'Doe',
+        email: 'mary@test.com',
+        password: 'pass1',
+        password_confirmation: 'pass1'
+      )
+    end
+    it 'should authetificate if there are spaces before and after the email' do
+      subject.save!
+      session = User.authenticate_with_credentials(" mary@test.com ","pass1")
+      expect(session).to be_truthy
+    end
+    it 'should authetificate if there are upper case in the email' do
+      subject.save!
+      session = User.authenticate_with_credentials("mAry@test.com","pass1")
+      expect(session).to be_truthy
+    end
+    it 'should authetificate if there are spaces before and after the email' do
+      subject.save!
+      session = User.authenticate_with_credentials("mary@test.com","pass1")
+      expect(session).to be_truthy
+    end
+  end
+
 end

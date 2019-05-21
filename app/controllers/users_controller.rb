@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def create
+    byebug
     @user = User.new(user_params)
 
      if @user.save

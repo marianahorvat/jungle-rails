@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    byebug
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       # If user exists and the password entered by the user is correct.
