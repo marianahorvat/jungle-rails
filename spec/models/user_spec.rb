@@ -9,8 +9,8 @@ RSpec.describe User, type: :model do
         first_name: 'Mary',
         last_name: 'Smith',
         email: 'mary@test.com',
-        password: '123',
-        password_confirmation: '123'
+        password: '12345',
+        password_confirmation: '12345'
       )
     end
     it 'Should be created if all required fields are present' do
@@ -67,6 +67,14 @@ RSpec.describe User, type: :model do
       expect(subject).to_not be_valid
       expect(subject.errors.full_messages).to include("Email has already been taken")
     end
+
+    it 'password should have a minimum length of 5 characters' do
+      subject.password = 'snow'
+      subject.password_confirmation = 'snow'
+      expect(subject).to_not be_valid
+      expect(subject.errors.full_messages).to include("Password is too short (minimum is 5 characters)")
+    end
+
   end
 
 end
